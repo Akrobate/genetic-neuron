@@ -8,11 +8,14 @@
 #include <math.h>
 #include <vector>
 
-using namespace std;
+#include <iostream>
+#include <string>
+#include <fstream>
 
 #include "Individus.h"
 #include "Item.h"
 
+using namespace std;
 
 class Monde
 {
@@ -32,6 +35,11 @@ class Monde
         vector<Individus> individus;
         vector<Item> items;
 
+
+        void saveIndividus(string filename);
+        void loadIndividus(string filename);
+
+
         int nbIndividus;
         int nbItems;
 
@@ -40,6 +48,8 @@ class Monde
         double sizeX;
         double sizeY;
         double stepXY;
+        int generation;
+        int duration;
 };
 
 #endif // MONDE_H

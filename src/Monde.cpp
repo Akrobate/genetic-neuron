@@ -8,6 +8,12 @@ Monde::Monde() {
     this->sizeX = 1000;
     this->sizeY = 1000;
     this->stepXY = 20;
+
+
+    this->generation = 1;
+
+
+
 }
 
 Monde::~Monde() {
@@ -71,6 +77,132 @@ void Monde::createItems(int nbr) {
         this->items.push_back(item);
     }
 }
+
+
+void Monde::saveIndividus(string filename) {
+
+    string path = "data/";
+    string filenamePath = path+filename;
+
+
+    char *nomFichier = const_cast<char*>(filenamePath.c_str());
+
+    ofstream fichier(nomFichier, ios::out | ios::trunc);
+    if (fichier) {
+        // On ecrit le numero de la generation
+        fichier << "GENERATION: " << this->generation << endl;
+
+        // On ecrit le nombre d'individus
+        fichier << "INDIVIDUS: " << this->individus.size() << endl;
+
+        // On ecrit le nombre d'items dans le monde
+        fichier << "ITEMS: " << this->items.size() << endl;
+
+        // On calcule puis on ecrit le score total des individus
+        int scoreTotal = 0;
+        for (int i = 0; i < this->individus.size(); i++) {
+            scoreTotal += this->individus[i].eaten;
+        }
+        fichier << "SCORETOTAL: " << scoreTotal << endl;
+
+        // on ecrit les scores de chaqu'un des individus
+        fichier << "[INDIVIDUS_SCORES]" << endl;
+        for (int i = 0; i < this->individus.size(); i++) {
+            fichier << this->individus[i].eaten << ' ';
+        }
+        fichier << endl;
+        fichier << "[/INDIVIDUS_SCORES]" << endl;
+
+        // on ecrit chaque individus
+        fichier << "[INDIVIDUS]" << endl;
+        for (int i = 0; i < this->individus.size(); i++) {
+            fichier << this->individus[i].brain.exportStringBrain(8) << endl;
+        }
+        fichier << "[/INDIVIDUS]" << endl;
+
+        fichier << "FILEEND" << endl;
+
+
+
+
+        fichier.close();
+    }
+
+
+}
+
+
+
+void Monde::loadIndividus(string filename) {
+
+    string path = "data/";
+    string filenamePath = path+filename;
+
+    // On réinitialise le monde
+    this->individus.clear();
+    this->items.clear();
+
+    this->nbIndividus = 0;
+    this->nbItems = 0;
+
+    char *nomFichier = const_cast<char*>(filenamePath.c_str());
+
+    ifstream fichier(nomFichier, ios::in);
+    if (fichier) {
+        string usefull;
+
+
+          while(!fichier.eof()) {
+                fichier >> usefull;
+                // std::cout << usefull << "\n"; // DEBUG
+
+                // On set le numero de la generation
+                if (usefull.compare("GENERATION:") == 0) {
+                    int nbGenerations;
+                    fichier >> nbGenerations;
+                    this->generation = nbGenerations;
+                }
+
+                // Creation du bon nombre d'Items
+                if (usefull.compare("ITEMS:") == 0) {
+                    int nbItems;
+                    fichier >> nbItems;
+                    this->createItems(nbItems);
+                }
+
+
+                // Creation et chargement d'individus
+                if (usefull.compare("[INDIVIDUS]") == 0) {
+
+                    string localUsefull = "0";
+                    while  (localUsefull.compare("[/INDIVIDUS]") != 0 ) {
+                        if (localUsefull.compare("0") == 0) {
+                            fichier >> localUsefull;
+                        } else {
+                            // crea individus
+                            // std::cout << localUsefull << "\n"; // DEBUG
+
+                            Individus ind;
+                            ind.brain.importStringBrain(localUsefull, 8);
+                            this->individus.push_back(ind);
+                            this->nbIndividus = this->individus.size();
+
+                            fichier >> localUsefull;
+
+                        }
+
+                    }
+
+                }
+
+            }
+       fichier.close();
+    }
+}
+
+
+
+
 
 void Monde::draw() {
     this->drawTerrain();

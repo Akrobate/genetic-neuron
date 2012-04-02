@@ -31,22 +31,15 @@ Monde myMonde;
 Individus myIndividus;
 Individus tousIndividus[100];
 Item myItem;
+Evolution myEvolution;
+
 
 bool play = true;
 
 
 int camMode = 0;
 
-int main(int argc, char *argv[])
-{
-/*
-    BinaryConverter bin;
-    vector<bool> ret = bin.toBinaryConvert(1234567891);
-    int test = bin.toDecimalConvert(ret);
-    printf("devrait etre  : %d \n", test);
-    bin.printBinary();
-    exit(0);
-  */
+int main(int argc, char *argv[]) {
 
     SDL_Event event;
     initGL();
@@ -54,8 +47,21 @@ int main(int argc, char *argv[])
     Uint32 current_time,ellapsed_time;
     Uint32 start_time;
 
-   // myMonde.createIndividus(100);
-   // myMonde.createItems(20);
+    myMonde.createIndividus(5);
+    myMonde.createItems(20);
+
+
+    myMonde.saveIndividus("fichiertest.txt");
+    myMonde.loadIndividus("fichiertest.txt");
+
+    // evolution
+    myEvolution.setIndividus(myMonde.individus);
+    myEvolution.createNewGeneration();
+    myMonde.individus.clear();
+    myMonde.individus = myEvolution.newGenerationIndividus;
+
+    myMonde.saveIndividus("apres_evolution.txt");
+
 
     while(1)
     {
@@ -99,8 +105,8 @@ int main(int argc, char *argv[])
         ellapsed_time = current_time - last_time;
         last_time = current_time;
 
- //       angleZ += 0.05 * ellapsed_time;
-  //      angleX += 0.05 * ellapsed_time;
+  //    angleZ += 0.05 * ellapsed_time;
+  //    angleX += 0.05 * ellapsed_time;
 
 
         if (play) {
@@ -238,7 +244,7 @@ void testsUnit() {
     myMonde.individus[0].brain.initRandomPoids(); // random poids
     printf("avant le importStringVect\n");
 
-   // cout<<strPoids<<endl;
+    // cout<<strPoids<<endl;
 
     vector<int> ttmp = myMonde.individus[0].brain.importStringVector(strPoids, 8);
 
