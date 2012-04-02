@@ -33,6 +33,7 @@ vector<int> Evolution::select2Individus() {
         eaten[i] = this->individus[i].eaten + 1;
     }
 
+    wheel.assign(eaten.size(), 0);
 
     int total = 0;
     for (int i = 0; i < eaten.size(); i ++) {
