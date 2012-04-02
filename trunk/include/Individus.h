@@ -2,6 +2,7 @@
 #define INDIVIDUS_H
 
 
+
 #include <SDL/SDL.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -18,6 +19,9 @@ using namespace std;
 class Individus
 {
     public:
+
+        PerceptronBrain brain;
+
 
         vector<bool> frontalSensor; // capteur a l'avant: 001000
         vector<bool> motors;    // moteur 000 000 premier 3bits moteur gauche 3 derniers bits moteur droite
@@ -40,8 +44,12 @@ class Individus
         void moove();
 
         void deplacementMotors();
+
         void deplacementAleatoire();
         void logicalBrainMoove();
+
+        void neuronalBrainMoove();
+
         void updateFrontalSensor(vector<Item> items);
     protected:
     private:

@@ -72,11 +72,6 @@ void Monde::createItems(int nbr) {
     }
 }
 
-
-
-
-
-
 void Monde::draw() {
     this->drawTerrain();
 
