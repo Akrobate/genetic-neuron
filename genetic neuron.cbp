@@ -29,6 +29,8 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add library="GL" />
+					<Add library="GLU" />
 				</Linker>
 			</Target>
 		</Build>
@@ -40,13 +42,19 @@
 			<Add option="`sdl-config --libs`" />
 		</Linker>
 		<Unit filename="cb.bmp" />
+		<Unit filename="include/BinaryConverter.h" />
+		<Unit filename="include/Evolution.h" />
 		<Unit filename="include/Individus.h" />
 		<Unit filename="include/Item.h" />
 		<Unit filename="include/Monde.h" />
+		<Unit filename="include/PerceptronBrain.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/BinaryConverter.cpp" />
+		<Unit filename="src/Evolution.cpp" />
 		<Unit filename="src/Individus.cpp" />
 		<Unit filename="src/Item.cpp" />
 		<Unit filename="src/Monde.cpp" />
+		<Unit filename="src/PerceptronBrain.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

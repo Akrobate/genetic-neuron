@@ -5,9 +5,15 @@
 #include <stdio.h>  //inclusion pour le printf
 #include <vector>
 
+#include <iostream>
+#include <string>
+
 #include "include/Monde.h"
+#include "include/Evolution.h"
 #include "include/Individus.h"
 #include "include/Item.h"
+
+#include "include/BinaryConverter.h"
 
 #define M_PI  3.14159265358979323846
 
@@ -16,7 +22,7 @@ using namespace std;
 // prototype de main
 void Dessiner();
 void initGL();
-
+void testsUnit();
 
 // Declaration de globales
 double angleZ = 0;
@@ -33,19 +39,23 @@ int camMode = 0;
 
 int main(int argc, char *argv[])
 {
+/*
+    BinaryConverter bin;
+    vector<bool> ret = bin.toBinaryConvert(1234567891);
+    int test = bin.toDecimalConvert(ret);
+    printf("devrait etre  : %d \n", test);
+    bin.printBinary();
+    exit(0);
+  */
+
     SDL_Event event;
     initGL();
     Uint32 last_time = SDL_GetTicks();
     Uint32 current_time,ellapsed_time;
     Uint32 start_time;
 
-
-    //myMonde.createIndividus(200);
-    //myMonde.createItems(60);
-
-
-    myMonde.createIndividus(100);
-    myMonde.createItems(50);
+   // myMonde.createIndividus(100);
+   // myMonde.createItems(20);
 
     while(1)
     {
@@ -195,3 +205,66 @@ void initGL()
 }
 
 
+/***************************
+* TESTS UNITAIRES
+***************************/
+
+
+void testsUnit() {
+
+    // Partie debug LOAD/EXPORT BRAIN.
+    myMonde.createIndividus(1);
+    myMonde.createItems(1);
+
+    printf("Avant lexport:\n");
+    myMonde.individus[0].brain.drawBrainConsole();      //Render matrice
+
+    vector<int> poids = myMonde.individus[0].brain.exportVectorPoids(); // export matrice
+
+    myMonde.individus[0].brain.initRandomPoids();       // random poids
+
+    myMonde.individus[0].brain.importVectorPoids(poids);    // load poids
+
+    printf("\n\n\nApres Le Load:\n");
+    myMonde.individus[0].brain.drawBrainConsole();      // render matrice
+
+
+    string strPoids="";
+
+    strPoids = myMonde.individus[0].brain.exportStringVector(poids, 8); // exmport de la chaine
+    printf("La chaine de carractere fait: %d\n\n", strPoids.size());
+
+
+    myMonde.individus[0].brain.initRandomPoids(); // random poids
+    printf("avant le importStringVect\n");
+
+   // cout<<strPoids<<endl;
+
+    vector<int> ttmp = myMonde.individus[0].brain.importStringVector(strPoids, 8);
+
+    BinaryConverter bin;
+    bin.printBinary(ttmp);
+
+    printf("loaded matrice\n");
+    myMonde.individus[0].brain.importVectorPoids(ttmp);    // load poids
+    myMonde.individus[0].brain.drawBrainConsole();      // render matrice
+
+
+   // printf("%s", strPoids);
+    //cout<<strPoids<<endl;
+
+    //* test de normalisation
+    /*
+    printf("\nAvant le normalize:\n");
+    BinaryConverter bin;
+    vector<bool> test = bin.toBinaryConvert(255);
+    bin.printBinary(test);
+
+
+    printf("\nApres le normalize:\n");
+    vector<bool> test2 = bin.normalizeBinary(test, 10);
+    bin.printBinary(test2);
+    */
+
+
+}

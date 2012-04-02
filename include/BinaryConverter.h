@@ -18,11 +18,14 @@ class BinaryConverter
         BinaryConverter();
         virtual ~BinaryConverter();
         void printBinary();
+        void printBinary(vector<bool> vect);
+        void printBinary(vector<int> vect);
         void setDecimalInt(int dec);
         void setBinaryTab(vector<bool> bin);
         void toDecimalConvert();
         int toDecimalConvert(vector<bool> bin);
-        vector<bool> toBinaryConvert(int decimalInt);
+        vector<bool> toBinaryConvert(int unsigned decimalInt);
+        vector<bool> normalizeBinary(vector<bool> vect, int sizeNeeded);
     protected:
     private:
 };

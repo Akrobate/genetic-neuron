@@ -12,6 +12,10 @@ Individus::Individus()
 
     this->eaten = 0;
 
+    // Initialisation du cerveau
+    this->brain.initRandomPoids();
+
+
     // 6 etant le nombre de sensors
     this->frontalSensor.assign(6,0);
 
@@ -116,10 +120,14 @@ void Individus::deplacementAleatoire() {
 void Individus::moove() {
 
     // this->logicalBrainMoove();
-    // this->deplacementAleatoire();
+//     this->deplacementAleatoire();
     // this->avance(0.8);
     // this->tourneGauche(0.1);
-    this->deplacementMotors();
+
+    //this->deplacementMotors(); // sous methode
+
+     this->neuronalBrainMoove();
+
 
 
 }
@@ -129,6 +137,8 @@ void Individus::deplacementMotors() {
 
     vector<bool> rightMotor;
     vector<bool> leftMotor;
+    double step = 1.7;
+
 
     int vitesseRightMotor;
     int vitesseLeftMotor;
@@ -146,15 +156,27 @@ void Individus::deplacementMotors() {
     vitesseLeftMotor = bin.toDecimalConvert(leftMotor);
     vitesseRightMotor = bin.toDecimalConvert(rightMotor);
 
+
+
+
     if (vitesseLeftMotor > vitesseRightMotor) {
         tourneAmplitude = vitesseLeftMotor - vitesseRightMotor;
-        this->tourneDroite(tourneAmplitude);
-        this->avance(vitesseRightMotor);
+        this->tourneDroite(tourneAmplitude/step);
+        this->avance(vitesseRightMotor/step);
     } else {
         tourneAmplitude = vitesseRightMotor - vitesseLeftMotor;
-        this->tourneGauche(tourneAmplitude);
-        this->avance(vitesseLeftMotor);
+        this->tourneGauche(tourneAmplitude/step);
+        this->avance(vitesseLeftMotor/step);
     }
+
+
+    // Cas peut etre a gerer avec un neurone en plus (neurone:"jenevoisrien")
+    if (vitesseLeftMotor == 0 && vitesseRightMotor == 0) {
+        this->deplacementAleatoire();
+    }
+
+
+
     // printf ("mLeft : %d / mRight : %d \n", vitesseLeftMotor , vitesseRightMotor );
 }
 
@@ -176,6 +198,14 @@ void Individus::deplacementMotors() {
 
 
 */
+
+
+void Individus::neuronalBrainMoove() {
+    this->brain.in = this->frontalSensor;
+    this->brain.think();
+    this->motors = this->brain.out;
+    this->deplacementMotors();
+}
 
 
 
