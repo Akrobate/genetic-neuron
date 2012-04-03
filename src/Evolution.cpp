@@ -221,6 +221,7 @@ Individus Evolution::mutation(Individus indiv) {
         brain[genamuter] = '1';
     }
     result.brain.importStringBrain(brain, 8);
+    return result;
 }
 
 
@@ -250,12 +251,17 @@ void Evolution::createNewGeneration() {
     }
 
 
+
+
+
+
     int _max;
     int _lastMax;
     int _maxid;
 
     vector<Individus> localInd;
     localInd = this->individus;
+
 
 
     // creation de la nouvelle generation avec les individus concerves
@@ -272,25 +278,36 @@ void Evolution::createNewGeneration() {
             }
         }
 
-        _max = 0;
-        _maxid = 0;
-
         // On ajoute le meilleur individus
         this->newGenerationIndividus.push_back ( localInd[_maxid] );
 
         // On exclut le meilleur individus de la liste restante
         localInd.erase (localInd.begin() + _maxid);
+
+        _max = 0;
+        _maxid = 0;
+
+
     }
+
+
+
 
     // On concatene la nouvelle generation avec les enfants
     for (int i = 0; i < this->children.size(); i++) {
-        if ((rand()%mutationIndice) == 0) {     // mutation des enfant en tenant compte de l'indice
-            this->newGenerationIndividus.push_back(this->mutation(this->children[i]));
+        if ((rand() % this->mutationIndice) == 0) {     // mutation des enfant en tenant compte de l'indice
+           this->newGenerationIndividus.push_back(this->mutation(this->children[i]));
         } else {
             this->newGenerationIndividus.push_back(this->children[i]);
         }
 
     }
+
+
+
+
+
+
 
     // Nouvelle generation crée.
 
