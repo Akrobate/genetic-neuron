@@ -45,9 +45,9 @@ int main(int argc, char *argv[]) {
     initGL();
     Uint32 last_time = SDL_GetTicks();
     Uint32 current_time,ellapsed_time;
-    Uint32 start_time;
+    Uint32 start_time, generationTimeStart, generationTime, generationDuration;
 
-    myMonde.createIndividus(5);
+    myMonde.createIndividus(100);
     myMonde.createItems(20);
 
 
@@ -56,15 +56,32 @@ int main(int argc, char *argv[]) {
 
     // evolution
     myEvolution.setIndividus(myMonde.individus);
+
     myEvolution.createNewGeneration();
+
     myMonde.individus.clear();
     myMonde.individus = myEvolution.newGenerationIndividus;
 
     myMonde.saveIndividus("apres_evolution.txt");
 
+    generationTimeStart = 0;
+    generationDuration = 1000;
+
+    generationDuration *= 10;
+
+    // printf("%d GET TICKS\n", SDL_GetTicks()); //DEBUG
 
     while(1)
     {
+        if(SDL_GetTicks() > (generationTimeStart + generationDuration)) {
+
+            generationTimeStart = SDL_GetTicks();
+            printf("Bip\n");
+
+
+        }
+
+
         start_time = SDL_GetTicks();
         while (SDL_PollEvent(&event)) {
             switch(event.type) {
@@ -118,7 +135,7 @@ int main(int argc, char *argv[]) {
             SDL_Delay(10 - ellapsed_time);
 
         } else {
-            printf("time: %d \n", (10 - ellapsed_time));
+           // printf("time: %d \n", (10 - ellapsed_time));
         }
 
 
