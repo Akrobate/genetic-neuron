@@ -11,7 +11,7 @@ Monde::Monde() {
 
 
     this->generation = 1;
-
+    this->filepath = "data/";
 
 
 }
@@ -81,7 +81,7 @@ void Monde::createItems(int nbr) {
 
 void Monde::saveIndividus(string filename) {
 
-    string path = "data/";
+    string path = this->filepath;
     string filenamePath = path+filename;
 
 
@@ -132,10 +132,62 @@ void Monde::saveIndividus(string filename) {
 }
 
 
+bool Monde::loadLastGeneration(string generationName) {
+
+    string filetotest = this->filepath + generationName + "-";
+
+    string filetoload;
+    bool next = true;
+    int generation = 0;
+    ostringstream oss;
+
+
+
+    while (next) {
+        generation++;
+
+        ostringstream oss;
+        oss << generation;
+        string filetotest2 = filetotest + oss.str() + ".txt";
+
+        cout << filetotest2 << endl;
+
+
+
+        char *nomFichier = const_cast<char*>(filetotest2.c_str());
+        FILE* fp = NULL;
+
+        fp = fopen( nomFichier, "rb" );
+        if( fp != NULL ) {
+
+            fclose( fp );
+            filetoload = generationName + "-" + oss.str() + ".txt";
+        } else {
+            next = false;
+
+        }
+
+    }
+
+
+    cout << "Fichier sera charge:" << filetoload << endl;
+
+    if (!filetoload.empty()) {
+        this->loadIndividus(filetoload);
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+
+
+
 
 void Monde::loadIndividus(string filename) {
 
-    string path = "data/";
+    string path = this->filepath;
     string filenamePath = path+filename;
 
     // On réinitialise le monde

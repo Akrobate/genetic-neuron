@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
+
 
 #include "include/Monde.h"
 #include "include/Evolution.h"
@@ -24,11 +26,14 @@ void Dessiner();
 void initGL();
 void testsUnit();
 
+
+
 // Declaration de globales
 double angleZ = 0;
 double angleX = 0;
 Monde myMonde;
 Individus myIndividus;
+
 Individus tousIndividus[100];
 Item myItem;
 Evolution myEvolution;
@@ -47,14 +52,16 @@ int main(int argc, char *argv[]) {
     Uint32 current_time,ellapsed_time;
     Uint32 start_time, generationTimeStart, generationTime, generationDuration;
 
-    myMonde.createIndividus(100);
-    myMonde.createItems(20);
+    //myMonde.createIndividus(100);
+    //myMonde.createItems(20);
 
 
-    myMonde.saveIndividus("fichiertest.txt");
-    myMonde.loadIndividus("fichiertest.txt");
+    // myMonde.saveIndividus("fichiertest.txt");
+    // myMonde.loadIndividus("fichiertest.txt");
 
     // evolution
+
+    /*
     myEvolution.setIndividus(myMonde.individus);
 
     myEvolution.createNewGeneration();
@@ -64,18 +71,52 @@ int main(int argc, char *argv[]) {
 
     myMonde.saveIndividus("apres_evolution.txt");
 
-    generationTimeStart = 0;
-    generationDuration = 1000;
+*/
 
-    generationDuration *= 10;
+    generationTimeStart = 0;
+    generationDuration = 1000; // Une seconde
+    generationDuration *= 60; // Une minute
+
+
+
+    if (!myMonde.loadLastGeneration("test")) {
+        myMonde.createIndividus(100);
+        myMonde.createItems(20);
+    }
+
+    printf("GENERATion:%d", myMonde.generation);
+
+
 
     // printf("%d GET TICKS\n", SDL_GetTicks()); //DEBUG
 
     while(1)
     {
-        if(SDL_GetTicks() > (generationTimeStart + generationDuration)) {
 
+        // ***** PARTIE QUI SE DECLANCHE TOUTES LES N MINUTES *******
+
+        if((SDL_GetTicks() > (generationTimeStart + generationDuration)) ) {
             generationTimeStart = SDL_GetTicks();
+
+
+                        ostringstream oss;
+                        oss << myMonde.generation;
+                        string osstm = oss.str();
+
+                        myMonde.saveIndividus("test-" + osstm + ".txt");
+
+                        // Process d'evolution;
+                        Evolution myEvolution;
+                        myEvolution.setIndividus(myMonde.individus);
+                        myEvolution.createNewGeneration();
+                        myMonde.individus.clear();
+
+                        printf("%d Taille de nouveau generation individus\n" , myEvolution.newGenerationIndividus.size());
+
+                        myMonde.individus = myEvolution.newGenerationIndividus;
+                        myMonde.generation++;
+
+
             printf("Bip\n");
 
 

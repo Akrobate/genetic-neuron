@@ -53,6 +53,7 @@ class Individus
         void updateFrontalSensor(vector<Item> items);
     protected:
     private:
+
 };
 
 #endif // INDIVIDUS_H

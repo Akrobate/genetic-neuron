@@ -97,7 +97,7 @@
 	<math.h>
 	"Individus.h"
 
-1333392556 /home/artiom/Documents/Projets/Personnels/genetic-neuron/include/Individus.h
+1333580592 /home/artiom/Documents/Projets/Personnels/genetic-neuron/include/Individus.h
 	<SDL/SDL.h>
 	<GL/gl.h>
 	<GL/glu.h>
@@ -133,7 +133,7 @@
 1333392556 source:/home/artiom/Documents/Projets/Personnels/genetic-neuron/src/PerceptronBrain.cpp
 	"../include/PerceptronBrain.h"
 
-1333491414 source:/home/artiom/Documents/Projets/Personnels/genetic-neuron/main.cpp
+1333584670 source:/home/artiom/Documents/Projets/Personnels/genetic-neuron/main.cpp
 	<SDL/SDL.h>
 	<GL/gl.h>
 	<GL/glu.h>
@@ -142,13 +142,14 @@
 	<vector>
 	<iostream>
 	<string>
+	<sstream>
 	"include/Monde.h"
 	"include/Evolution.h"
 	"include/Individus.h"
 	"include/Item.h"
 	"include/BinaryConverter.h"
 
-1333396314 /home/artiom/Documents/Projets/Personnels/genetic-neuron/include/Monde.h
+1333583525 /home/artiom/Documents/Projets/Personnels/genetic-neuron/include/Monde.h
 	<SDL/SDL.h>
 	<GL/gl.h>
 	<GL/glu.h>
@@ -158,9 +159,10 @@
 	<iostream>
 	<string>
 	<fstream>
+	<sstream>
 	"Individus.h"
 	"Item.h"
 
-1333409707 source:/home/artiom/Documents/Projets/Personnels/genetic-neuron/src/Monde.cpp
+1333585635 source:/home/artiom/Documents/Projets/Personnels/genetic-neuron/src/Monde.cpp
 	"../include/Monde.h"
 
