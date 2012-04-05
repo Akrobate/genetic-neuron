@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 
 #include "Individus.h"
 #include "Item.h"
@@ -38,17 +39,20 @@ class Monde
 
         void saveIndividus(string filename);
         void loadIndividus(string filename);
-
+        bool loadLastGeneration(string generationName);
 
         int nbIndividus;
         int nbItems;
-
+        int generation;
     protected:
     private:
+
+        string filepath;
+
         double sizeX;
         double sizeY;
         double stepXY;
-        int generation;
+
         int duration;
 };
 

@@ -8,25 +8,25 @@
 		<Cursor position="494" topLine="11" />
 	</File>
 	<File name="include/Individus.h" open="1" top="0" tabpos="6">
-		<Cursor position="180" topLine="17" />
+		<Cursor position="1108" topLine="0" />
 	</File>
 	<File name="include/Item.h" open="0" top="0" tabpos="7">
 		<Cursor position="132" topLine="0" />
 	</File>
 	<File name="include/Monde.h" open="1" top="0" tabpos="2">
-		<Cursor position="438" topLine="18" />
+		<Cursor position="215" topLine="4" />
 	</File>
 	<File name="include/PerceptronBrain.h" open="1" top="0" tabpos="8">
 		<Cursor position="814" topLine="10" />
 	</File>
 	<File name="main.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="1512" topLine="60" />
+		<Cursor position="1528" topLine="64" />
 	</File>
 	<File name="src/BinaryConverter.cpp" open="0" top="0" tabpos="9">
 		<Cursor position="615" topLine="0" />
 	</File>
 	<File name="src/Evolution.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="7189" topLine="177" />
+		<Cursor position="5692" topLine="25" />
 	</File>
 	<File name="src/Individus.cpp" open="1" top="0" tabpos="7">
 		<Cursor position="178" topLine="6" />
@@ -35,7 +35,7 @@
 		<Cursor position="749" topLine="0" />
 	</File>
 	<File name="src/Monde.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="4398" topLine="91" />
+		<Cursor position="4934" topLine="62" />
 	</File>
 	<File name="src/PerceptronBrain.cpp" open="1" top="0" tabpos="9">
 		<Cursor position="3201" topLine="0" />
