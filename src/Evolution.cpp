@@ -117,18 +117,21 @@ vector<Individus> Evolution::croisement2points(vector<Individus> parents) {
 
     vector<Individus> result;
 
-
-
-
     int brainSize = brain1.size();
 
-    int point1;
-    int point2;
+    int point1 = 0;
+    int point2 = 0;
 
     while ((point1 > point2 ) || (point1 == point2) || (point1 == 0)) {
         point1 = rand()%brainSize;
         point2 = rand()%brainSize;
+
+
+
     }
+
+
+
 
 
     for (int i = 0; i < brainSize; i++) {
@@ -173,15 +176,20 @@ vector<Individus> Evolution::croisement3points(vector<Individus> parents) {
 
     int brainSize = brain1.size();
 
-    int point1;
-    int point2;
-    int point3;
+    int point1=0;
+    int point2=0;
+    int point3=0;
 
     while ((point1 > point2 ) || (point2 > point3) || (point1 == point2) || (point1 == 0) || (point3 == point2) ) {
         point1 = rand()%brainSize;
         point2 = rand()%brainSize;
         point3 = rand()%brainSize;
     }
+
+   // printf("point1: %d \n", point1);
+   // printf("point2: %d \n", point2);
+   // printf("point3: %d \n", point3);
+
 
 
     for (int i = 0; i < brainSize; i++) {
@@ -235,8 +243,14 @@ void Evolution::createNewGeneration() {
     vector<Individus> children;
     vector<Individus> parents;
 
+
+
+
+
+
     // creation des children
-    for (int i = 0; i < 25; i++) {
+    for (int i = 0; i < 5; i++) {
+
         selectedIds = this->select2Individus();
         parents.push_back(this->individus[selectedIds[0]]);
         parents.push_back(this->individus[selectedIds[1]]);
@@ -265,7 +279,7 @@ void Evolution::createNewGeneration() {
 
 
     // creation de la nouvelle generation avec les individus concerves
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 10; i++) {
         for (int j=0; j < localInd.size(); j++) {
             if (j==0) {
                 _max = localInd[j].eaten;

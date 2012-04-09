@@ -73,15 +73,50 @@ int main(int argc, char *argv[]) {
 
 */
 
+/*
+    // Test fonctions de croisement
+    Evolution evoTest;
+    vector<Individus> parents;
+    vector<Individus> enfants;
+    Individus p1;
+    Individus p2;
+    parents.push_back(p1);
+    parents.push_back(p2);
+
+    // test croisement deux points
+    enfants = evoTest.croisement2Individus(parents);
+
+    cout << "P1: " << parents[0].brain.exportStringBrain(8) << endl;
+    cout << "P2: " << parents[1].brain.exportStringBrain(8) << endl;
+
+    cout << "C1: " << enfants[0].brain.exportStringBrain(8) << endl;
+    cout << "C2: " << enfants[1].brain.exportStringBrain(8) << endl;
+
+    ofstream fichier("data/testCroisement.txt", ios::out | ios::trunc);
+    if (fichier) {
+        fichier << "P1: " << parents[0].brain.exportStringBrain(8) << endl;
+        fichier << "P2: " << parents[1].brain.exportStringBrain(8) << endl;
+        fichier << "C1: " << enfants[0].brain.exportStringBrain(8) << endl;
+        fichier << "C2: " << enfants[1].brain.exportStringBrain(8) << endl;
+
+    }
+     exit(0);
+*/
+
+
+
+
+
     generationTimeStart = 0;
     generationDuration = 1000; // Une seconde
     generationDuration *= 60; // Une minute
+    //generationDuration *= 5; // 5 minutes
 
 
 
     if (!myMonde.loadLastGeneration("test")) {
-        myMonde.createIndividus(100);
-        myMonde.createItems(20);
+        myMonde.createIndividus(20);
+        myMonde.createItems(10);
     }
 
     printf("GENERATion:%d", myMonde.generation);
@@ -98,6 +133,14 @@ int main(int argc, char *argv[]) {
         if((SDL_GetTicks() > (generationTimeStart + generationDuration)) ) {
             generationTimeStart = SDL_GetTicks();
 
+                        myMonde.generation++;
+
+                        // affichage du score total de la generation
+                        int scoreTotal = 0;
+                        for (int i = 0; i < myMonde.individus.size(); i++) {
+                            scoreTotal += myMonde.individus[i].eaten;
+                        }
+                        cout << "SCORETOTAL: " << scoreTotal << endl;
 
                         ostringstream oss;
                         oss << myMonde.generation;
@@ -114,7 +157,17 @@ int main(int argc, char *argv[]) {
                         printf("%d Taille de nouveau generation individus\n" , myEvolution.newGenerationIndividus.size());
 
                         myMonde.individus = myEvolution.newGenerationIndividus;
-                        myMonde.generation++;
+
+                        // individus clear scores
+                        for (int i = 0; i < myMonde.individus.size(); i++) {
+                            myMonde.individus[i].eaten = 0;
+
+                        }
+
+
+
+
+
 
 
             printf("Bip\n");

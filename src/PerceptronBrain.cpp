@@ -129,8 +129,8 @@ vector<int> PerceptronBrain::importStringVector(string import, int normValue) {
             tmpV = bin.toDecimalConvert(localBinary);
             tmpV -= 128;
 
-            printf("\n val:%d", tmpV);
-            bin.printBinary(localBinary);
+            //printf("\n val:%d", tmpV);
+            //bin.printBinary(localBinary);
 
             result.push_back(tmpV);
             localBinary.clear();
