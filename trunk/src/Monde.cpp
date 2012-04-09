@@ -10,7 +10,7 @@ Monde::Monde() {
     this->stepXY = 20;
 
 
-    this->generation = 1;
+    this->generation = 0;
     this->filepath = "data/";
 
 
