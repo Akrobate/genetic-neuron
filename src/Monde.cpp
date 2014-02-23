@@ -1,19 +1,12 @@
 #include "../include/Monde.h"
 
-
-
-
 Monde::Monde() {
     //ctor
     this->sizeX = 1000;
     this->sizeY = 1000;
     this->stepXY = 20;
-
-
     this->generation = 0;
     this->filepath = "data/";
-
-
 }
 
 Monde::~Monde() {
@@ -22,14 +15,10 @@ Monde::~Monde() {
 
 
 void Monde::clearEat() {
-
     // individus clear scores
     for (int i = 0; i < this->individus.size(); i++) {
         this->individus[i].eaten = 0;
-
     }
-
-
 }
 
 
@@ -41,9 +30,7 @@ void Monde::checkEat() {
             double dist = this->calculDistance(&this->individus[i], &this->items[j]);
             if (dist < this->items[j].size) {
                 this->items.erase(this->items.begin() + j);
-
                 this->individus[i].eat();
-
             }
         }
     }
@@ -77,7 +64,6 @@ void Monde::createIndividus(int nbr) {
     for (int i=0; i<nbr; i++) {
         Individus ind;
         this->individus.push_back(ind);
-
     }
 }
 
@@ -95,8 +81,6 @@ void Monde::saveIndividus(string filename) {
 
     string path = this->filepath;
     string filenamePath = path+filename;
-
-
     char *nomFichier = const_cast<char*>(filenamePath.c_str());
 
     ofstream fichier(nomFichier, ios::out | ios::trunc);
@@ -131,29 +115,19 @@ void Monde::saveIndividus(string filename) {
             fichier << this->individus[i].brain.exportStringBrain(8) << endl;
         }
         fichier << "[/INDIVIDUS]" << endl;
-
         fichier << "FILEEND" << endl;
-
-
-
-
         fichier.close();
     }
-
-
 }
 
 
 bool Monde::loadLastGeneration(string generationName) {
 
     string filetotest = this->filepath + generationName + "-";
-
     string filetoload;
     bool next = true;
     int generation = 0;
     ostringstream oss;
-
-
 
     while (next) {
         generation++;
@@ -164,23 +138,17 @@ bool Monde::loadLastGeneration(string generationName) {
 
         cout << filetotest2 << endl;
 
-
-
         char *nomFichier = const_cast<char*>(filetotest2.c_str());
         FILE* fp = NULL;
 
         fp = fopen( nomFichier, "rb" );
         if( fp != NULL ) {
-
             fclose( fp );
             filetoload = generationName + "-" + oss.str() + ".txt";
         } else {
             next = false;
-
         }
-
     }
-
 
     cout << "Fichier sera charge:" << filetoload << endl;
 
@@ -193,10 +161,6 @@ bool Monde::loadLastGeneration(string generationName) {
 }
 
 
-
-
-
-
 void Monde::loadIndividus(string filename) {
 
     string path = this->filepath;
@@ -205,7 +169,6 @@ void Monde::loadIndividus(string filename) {
     // On réinitialise le monde
     this->individus.clear();
     this->items.clear();
-
     this->nbIndividus = 0;
     this->nbItems = 0;
 
@@ -215,10 +178,8 @@ void Monde::loadIndividus(string filename) {
     if (fichier) {
         string usefull;
 
-
           while(!fichier.eof()) {
                 fichier >> usefull;
-                // std::cout << usefull << "\n"; // DEBUG
 
                 // On set le numero de la generation
                 if (usefull.compare("GENERATION:") == 0) {
@@ -234,7 +195,6 @@ void Monde::loadIndividus(string filename) {
                     this->createItems(nbItems);
                 }
 
-
                 // Creation et chargement d'individus
                 if (usefull.compare("[INDIVIDUS]") == 0) {
 
@@ -243,16 +203,11 @@ void Monde::loadIndividus(string filename) {
                         if (localUsefull.compare("0") == 0) {
                             fichier >> localUsefull;
                         } else {
-                            // crea individus
-                            // std::cout << localUsefull << "\n"; // DEBUG
-
                             Individus ind;
                             ind.brain.importStringBrain(localUsefull, 8);
                             this->individus.push_back(ind);
                             this->nbIndividus = this->individus.size();
-
                             fichier >> localUsefull;
-
                         }
 
                     }
@@ -274,9 +229,7 @@ void Monde::draw() {
     for(int i=0; i < this->individus.size(); i++) {
         this->individus[i].draw();
         this->individus[i].moove();
-
         this->individus[i].updateFrontalSensor(this->items);
-
     }
 
     for(int i=0; i < this->items.size(); i++) {
@@ -301,7 +254,6 @@ void Monde::drawTerrain() {
         glVertex3d(0,y,0);
         glVertex3d(this->sizeX, y,0);
     }
-
 
     glEnd();
     glPopMatrix();

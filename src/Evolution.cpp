@@ -3,8 +3,6 @@
 Evolution::Evolution(){
     //ctor
     this->mutationIndice = 10;
-
-
 }
 
 Evolution::~Evolution(){
@@ -17,8 +15,6 @@ void Evolution::setIndividus(vector <Individus> individus) {
 }
 
 vector<int> Evolution::select2Individus() {
-
-
     vector<int> eaten;
     vector<int> wheel;
 
@@ -28,7 +24,6 @@ vector<int> Evolution::select2Individus() {
     int choisen2;
 
     eaten.assign(this->individus.size(), 0);
-
 
     for(int i = 0; i < this->individus.size(); i ++) {
         eaten[i] = this->individus[i].eaten + 1;
@@ -82,10 +77,6 @@ vector<int> Evolution::select2Individus() {
         }
     }
 
-    // construction de la reponse;
-    //choisen.push_back(this->individus[choisen1]);
-    //choisen.push_back(this->individus[choisen2]);
-
     vector<int> result;
     result.push_back(choisen1);
     result.push_back(choisen2);
@@ -126,14 +117,7 @@ vector<Individus> Evolution::croisement2points(vector<Individus> parents) {
     while ((point1 > point2 ) || (point1 == point2) || (point1 == 0)) {
         point1 = rand()%brainSize;
         point2 = rand()%brainSize;
-
-
-
     }
-
-
-
-
 
     for (int i = 0; i < brainSize; i++) {
         if ((i < point1) || (i >= point2))  {
@@ -154,8 +138,6 @@ vector<Individus> Evolution::croisement2points(vector<Individus> parents) {
     result.push_back(child2);
 
     return result;
-
-
 }
 
 
@@ -172,9 +154,6 @@ vector<Individus> Evolution::croisement3points(vector<Individus> parents) {
 
     vector<Individus> result;
 
-
-
-
     int brainSize = brain1.size();
 
     int point1=0;
@@ -186,12 +165,6 @@ vector<Individus> Evolution::croisement3points(vector<Individus> parents) {
         point2 = rand()%brainSize;
         point3 = rand()%brainSize;
     }
-
-   // printf("point1: %d \n", point1);
-   // printf("point2: %d \n", point2);
-   // printf("point3: %d \n", point3);
-
-
 
     for (int i = 0; i < brainSize; i++) {
         if ((i < point1) || ((i >= point2) && (i < point3) ))  {
@@ -244,11 +217,6 @@ void Evolution::createNewGeneration() {
     vector<Individus> children;
     vector<Individus> parents;
 
-
-
-
-
-
     // creation des children
     for (int i = 0; i < (this->countIndividus / 4); i++) {
 
@@ -266,18 +234,12 @@ void Evolution::createNewGeneration() {
     }
 
 
-
-
-
-
     int _max;
     int _lastMax;
     int _maxid;
 
     vector<Individus> localInd;
     localInd = this->individus;
-
-
 
     // creation de la nouvelle generation avec les individus concerves
     for (int i = 0; i < (this->countIndividus / 2); i++) {
@@ -305,9 +267,6 @@ void Evolution::createNewGeneration() {
 
     }
 
-
-
-
     // On concatene la nouvelle generation avec les enfants
     for (int i = 0; i < this->children.size(); i++) {
         if ((rand() % this->mutationIndice) == 0) {     // mutation des enfant en tenant compte de l'indice
@@ -318,15 +277,7 @@ void Evolution::createNewGeneration() {
 
     }
 
-
-
-
-
-
-
     // Nouvelle generation crée.
-
-
 }
 
 

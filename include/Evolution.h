@@ -5,8 +5,6 @@
 #include <math.h>
 #include "Individus.h"
 
-
-
 class Evolution
 {
     public:
@@ -16,7 +14,6 @@ class Evolution
         vector<Individus> individus;
         int countIndividus;
 
-
         vector<int> parents;
         vector<Individus> children;
 
@@ -25,9 +22,6 @@ class Evolution
 
 
         vector<Individus> newGenerationIndividus;
-
-
-
         vector<int> select2Individus();
 
         void createNewGeneration();

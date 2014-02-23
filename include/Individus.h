@@ -22,7 +22,6 @@ class Individus
 
         PerceptronBrain brain;
 
-
         vector<bool> frontalSensor; // capteur a l'avant: 001000
         vector<bool> motors;    // moteur 000 000 premier 3bits moteur gauche 3 derniers bits moteur droite
 
