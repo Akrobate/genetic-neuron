@@ -27,6 +27,7 @@ class Monde
         void draw();
         void drawTerrain();
         void checkEat();
+        void clearEat();
 
         void respawnItems();
         void createIndividus(int nbr);
