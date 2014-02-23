@@ -7,17 +7,11 @@
 #include <cstdlib>
 #include <math.h>
 
-
-
-class Item
-{
+class Item {
     public:
-
         double x;
         double y;
-
         double size;
-
         Item();
         virtual ~Item();
         void draw();
@@ -26,5 +20,4 @@ class Item
     private:
         double angle;
 };
-
 #endif // ITEM_H
