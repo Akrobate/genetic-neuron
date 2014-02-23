@@ -2,13 +2,12 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <cstdlib>
-#include <stdio.h>  //inclusion pour le printf
+#include <stdio.h>
 #include <vector>
 
 #include <iostream>
 #include <string>
 #include <sstream>
-
 
 #include "include/Monde.h"
 #include "include/Evolution.h"
@@ -59,48 +58,37 @@ int main(int argc, char *argv[]) {
 
     printf("GENERATion:%d", myMonde.generation);
 
-    // printf("%d GET TICKS\n", SDL_GetTicks()); //DEBUG
-
-    while(1)
-    {
+    while(1) {
 
         // ***** PARTIE QUI SE DECLANCHE TOUTES LES N MINUTES *******
-
         if((SDL_GetTicks() > (generationTimeStart + generationDuration)) ) {
             generationTimeStart = SDL_GetTicks();
+            myMonde.generation++;
+            // affichage du score total de la generation
+            int scoreTotal = 0;
+            for (int i = 0; i < myMonde.individus.size(); i++) {
+                scoreTotal += myMonde.individus[i].eaten;
+            }
+            cout << "SCORETOTAL: " << scoreTotal << endl;
+            ostringstream oss;
+            oss << myMonde.generation;
+            string osstm = oss.str();
 
-                        myMonde.generation++;
+            myMonde.saveIndividus("test-" + osstm + ".txt");
 
-                        // affichage du score total de la generation
-                        int scoreTotal = 0;
-                        for (int i = 0; i < myMonde.individus.size(); i++) {
-                            scoreTotal += myMonde.individus[i].eaten;
-                        }
-                        cout << "SCORETOTAL: " << scoreTotal << endl;
+            // Process d'evolution;
+            Evolution myEvolution;
+            myEvolution.setIndividus(myMonde.individus);
+            myEvolution.createNewGeneration();
+            myMonde.individus.clear();
 
-                        ostringstream oss;
-                        oss << myMonde.generation;
-                        string osstm = oss.str();
+            printf("%d Taille de nouveau generation individus\n" , myEvolution.newGenerationIndividus.size());
+            myMonde.individus = myEvolution.newGenerationIndividus;
 
-                        myMonde.saveIndividus("test-" + osstm + ".txt");
-
-                        // Process d'evolution;
-                        Evolution myEvolution;
-                        myEvolution.setIndividus(myMonde.individus);
-                        myEvolution.createNewGeneration();
-                        myMonde.individus.clear();
-
-                        printf("%d Taille de nouveau generation individus\n" , myEvolution.newGenerationIndividus.size());
-
-                        myMonde.individus = myEvolution.newGenerationIndividus;
-
-                        // individus clear scores
-                        myMonde.clearEat();
-
-                        printf("------\n");
-
+            // individus clear scores
+            myMonde.clearEat();
+            printf("------\n");
         }
-
 
         start_time = SDL_GetTicks();
         while (SDL_PollEvent(&event)) {
@@ -164,70 +152,52 @@ int main(int argc, char *argv[]) {
 }
 
 
-void Dessiner()
-{
-        glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+void Dessiner() {
 
-        glMatrixMode( GL_MODELVIEW );
-        glLoadIdentity( );
+    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
 
-        //gluLookAt(100,100,100, 0,0,0, 0,0,1);
+    double lang;
+    double lx ;
+    double ly;
 
-                double lang;
-                double lx ;
-                double ly;
+    switch(camMode) {
+        case 0:
+            gluLookAt(200,200,200, 0,0,0, 0,0,1);
+        break;
+        case 1:
+            gluLookAt(1,1,900, 0,0,0, 0,0,1);
+        break;
+        case 2:
+            gluLookAt(100,100,100, 0,0,0, 0,0,1);
+        break;
+        case 3:
+            lang = myMonde.individus[0].angle;
+            lx = myMonde.individus[0].x;
+            ly = myMonde.individus[0].y;
+            gluLookAt(lx,ly,100, 0,0,0, 0,0,1);
+        break;
+        case 4:
+             lang = myMonde.individus[0].angle;
+             lx = myMonde.individus[0].x;
+             ly = myMonde.individus[0].y;
+            gluLookAt(lx,ly,100, lx + 20 * cos(lang / 180 * M_PI), ly + 20 *  sin(lang / 180 * M_PI), 1 , 0,0,1);
+        break;
 
-        switch(camMode) {
-            case 0:
-                gluLookAt(200,200,200, 0,0,0, 0,0,1);
-            break;
-            case 1:
-                gluLookAt(1,1,900, 0,0,0, 0,0,1);
-            break;
-            case 2:
-                gluLookAt(100,100,100, 0,0,0, 0,0,1);
-            break;
-            case 3:
-                 lang = myMonde.individus[0].angle;
-                 lx = myMonde.individus[0].x;
-                 ly = myMonde.individus[0].y;
+    }
 
-                gluLookAt(lx,ly,100, 0,0,0, 0,0,1);
-
-            break;
-            case 4:
-                 lang = myMonde.individus[0].angle;
-                 lx = myMonde.individus[0].x;
-                 ly = myMonde.individus[0].y;
-
-                gluLookAt(lx,ly,100, lx + 20 * cos(lang / 180 * M_PI), ly + 20 *  sin(lang / 180 * M_PI), 1 , 0,0,1);
-            break;
-
-        }
-        //gluLookAt(200,200,200, 0,0,0, 0,0,1);
-
-        //gluLookAt(1,1,900, 0,0,0, 0,0,1);
-
-        myMonde.draw();
-        myMonde.checkEat();
-        myMonde.respawnItems();
-        //myItem.draw();
-
-        //double dist = myMonde.calculDistance(&myIndividus, &myItem);
-
-        //printf("distance : %8f \n", dist);
-
-
-
-      //  myIndividus.avance(0.1);
+    myMonde.draw();
+    myMonde.checkEat();
+    myMonde.respawnItems();
 
     glFlush();
     SDL_GL_SwapBuffers();
 }
 
 
-void initGL()
-{
+void initGL() {
+
     SDL_Init(SDL_INIT_VIDEO);
     atexit(SDL_Quit);
     SDL_WM_SetCaption("SDL GL Application", NULL);
@@ -242,6 +212,7 @@ void initGL()
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST);
 	glFrontFace(GL_CW);
 	glShadeModel(GL_SMOOTH);
+
 }
 
 
@@ -305,8 +276,6 @@ void testsUnit() {
     vector<bool> test2 = bin.normalizeBinary(test, 10);
     bin.printBinary(test2);
     */
-
-
 
     //myMonde.createIndividus(100);
     //myMonde.createItems(20);
