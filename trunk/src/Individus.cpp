@@ -15,7 +15,6 @@ Individus::Individus()
     // Initialisation du cerveau
     this->brain.initRandomPoids();
 
-
     // 6 etant le nombre de sensors
     this->frontalSensor.assign(6,0);
 
@@ -26,7 +25,6 @@ Individus::Individus()
     if (1) {
         this->x = 500 - rand()%1000;
         this->y = 500 - rand()%1000;
-
         this->angle = rand()%360;
     }
 
@@ -41,9 +39,6 @@ Individus::Individus()
         this->motors[4] = rand()%2;
         this->motors[5] = rand()%2;
     }
-
-
-
 }
 
 Individus::~Individus()
@@ -54,7 +49,6 @@ Individus::~Individus()
 void Individus::eat() {
     this->eaten++;
 }
-
 
 
 void Individus::avance(double vitesse) {
@@ -75,7 +69,6 @@ void Individus::avance(double vitesse) {
         this->x -= 20;
     }
 
-
     if (yn < -500) {
         this->y *= -1;
         this->y -= 20;
@@ -85,22 +78,17 @@ void Individus::avance(double vitesse) {
         this->y *= -1;
         this->y += 20;
     }
-
-
-
 }
 
 void Individus::tourneDroite(double vitesse) {
+
     this->angle -= vitesse;
-
     this->avance(vitesse / 4);
-
-
 }
 
 void Individus::tourneGauche(double vitesse) {
-    this->angle += vitesse;
 
+    this->angle += vitesse;
     this->avance(vitesse / 4);
 }
 
@@ -118,33 +106,18 @@ void Individus::deplacementAleatoire() {
             this->tourneGauche( ((double)(rand()%1000))  / 100);
         break;
     }
-
-
-
 }
 
 void Individus::moove() {
 
-    // this->logicalBrainMoove();
-//     this->deplacementAleatoire();
-    // this->avance(0.8);
-    // this->tourneGauche(0.1);
-
-    //this->deplacementMotors(); // sous methode
-
      this->neuronalBrainMoove();
-
-
-
 }
-
 
 void Individus::deplacementMotors() {
 
     vector<bool> rightMotor;
     vector<bool> leftMotor;
     double step = 1.7;
-
 
     int vitesseRightMotor;
     int vitesseLeftMotor;
@@ -162,9 +135,6 @@ void Individus::deplacementMotors() {
     vitesseLeftMotor = bin.toDecimalConvert(leftMotor);
     vitesseRightMotor = bin.toDecimalConvert(rightMotor);
 
-
-
-
     if (vitesseLeftMotor > vitesseRightMotor) {
         tourneAmplitude = vitesseLeftMotor - vitesseRightMotor;
         this->tourneDroite(tourneAmplitude/step);
@@ -175,15 +145,10 @@ void Individus::deplacementMotors() {
         this->avance(vitesseLeftMotor/step);
     }
 
-
     // Cas peut etre a gerer avec un neurone en plus (neurone:"jenevoisrien")
     if (vitesseLeftMotor == 0 && vitesseRightMotor == 0) {
         this->deplacementAleatoire();
     }
-
-
-
-    // printf ("mLeft : %d / mRight : %d \n", vitesseLeftMotor , vitesseRightMotor );
 }
 
 /*
@@ -200,11 +165,7 @@ void Individus::deplacementMotors() {
 101010101010101010101010101010101010101010101010
 101010101010101010101010101010101010101010101010
 101010101010101010101010101010101010101010101010
-
-
-
 */
-
 
 void Individus::neuronalBrainMoove() {
     this->brain.in = this->frontalSensor;
@@ -212,8 +173,6 @@ void Individus::neuronalBrainMoove() {
     this->motors = this->brain.out;
     this->deplacementMotors();
 }
-
-
 
 void Individus::logicalBrainMoove() {
 
@@ -247,21 +206,13 @@ void Individus::logicalBrainMoove() {
         break;
     }
 
-   // this->avance(1 + ((double)(this->eaten) / 1));
    this->avance(1);
-
 }
-
-
-
-
-
 
 void Individus::draw() {
 
     double height = 1.5;
     glPushMatrix();
-
     glTranslated(this->x, this->y, 0);
 
     if (this->angle >= 360) {
@@ -271,8 +222,6 @@ void Individus::draw() {
     if (this->angle < 0) {
         this->angle += 360;
     }
-
-
 
     glRotated(this->angle - 180, 0, 0, 1);
     glScaled(10,10,10);
@@ -302,28 +251,25 @@ void Individus::draw() {
     glTranslated(-0.75,-1,1);
     glScaled(0.25,0.25,0.25);
     this->drawFrontalSensor();
-
-
     glPopMatrix();
-
 }
 
 void Individus::drawFrontalSensor() {
-       int sSize = this->frontalSensor.size();
+   int sSize = this->frontalSensor.size();
 
-        glBegin(GL_QUADS);
-            for (int i = 0; i < sSize; i++) {
-                if (this->frontalSensor[i]) {
-                    glColor3ub(0,200,0);
-                } else {
-                    glColor3ub(200,0,0);
-                }
-                glVertex3d( 0+i, 0, 0);
-                glVertex3d(1+i, 0, 0);
-                glVertex3d(1+i, 1, 0);
-                glVertex3d(0+i, 1, 0);
+    glBegin(GL_QUADS);
+    for (int i = 0; i < sSize; i++) {
+        if (this->frontalSensor[i]) {
+            glColor3ub(0,200,0);
+        } else {
+            glColor3ub(200,0,0);
         }
-        glEnd();
+        glVertex3d( 0+i, 0, 0);
+        glVertex3d(1+i, 0, 0);
+        glVertex3d(1+i, 1, 0);
+        glVertex3d(0+i, 1, 0);
+    }
+    glEnd();
 }
 
 
@@ -333,15 +279,11 @@ void Individus::updateFrontalSensor(vector<Item> items) {
         double x;
         double y;
         double dist;
-
         int firstParcours = true;
-
         double minDist = 0;
         int keyLePlusProche = 0;
         bool visible = false;
-
         double angleR = -1;
-
 
         for (int i=0; i < items.size(); i++) {
             x = this->x - items[i].x;
@@ -353,24 +295,24 @@ void Individus::updateFrontalSensor(vector<Item> items) {
             }
 
             // 2. Trouve le plus proche
-                // 2.1 Determine si visible
-                double _angle = (atan2(this->x - items[i].x , this->y - items[i].y) / M_PI *180) + 180;
-                double _angleR = (_angle + this->angle) ;
+            // 2.1 Determine si visible
+            double _angle = (atan2(this->x - items[i].x , this->y - items[i].y) / M_PI *180) + 180;
+            double _angleR = (_angle + this->angle) ;
 
-                if (_angleR > 360) {
-                    _angleR -= 360;
-                }
-                _angleR -= 90;
+            if (_angleR > 360) {
+                _angleR -= 360;
+            }
+            _angleR -= 90;
 
-                // Visibilité entre -90 et 90
-                if ((_angleR < 90) && (_angleR > -90)) {
-                  if (dist <= minDist) {
-                      minDist = dist;
-                      keyLePlusProche = i;
-                      visible = true;
-                      angleR = _angleR;
-                  }
-                }
+            // Visibilité entre -90 et 90
+            if ((_angleR < 90) && (_angleR > -90)) {
+              if (dist <= minDist) {
+                  minDist = dist;
+                  keyLePlusProche = i;
+                  visible = true;
+                  angleR = _angleR;
+              }
+            }
 
         }
 
@@ -380,8 +322,6 @@ void Individus::updateFrontalSensor(vector<Item> items) {
 
     int sSize = this->frontalSensor.size();
     step = (int) ((180) / sSize );
-
-    //printf ("step: %d \n", step);
 
     if (visible) {
         for (int i =0; i<sSize; i++) {
