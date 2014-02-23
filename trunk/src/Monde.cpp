@@ -30,7 +30,7 @@ void Monde::checkEat() {
             if (dist < this->items[j].size) {
                 this->items.erase(this->items.begin() + j);
 
-                this->individus[i].eaten++;
+                this->individus[i].eat();
 
             }
         }

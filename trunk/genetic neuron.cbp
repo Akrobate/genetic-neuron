@@ -11,13 +11,16 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option projectResourceIncludeDirsRelation="2" />
 				<Compiler>
+					<Add option="-w" />
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
 					<Add library="GL" />
 					<Add library="GLU" />
-					<Add library="-lmingw32 -lSDLmain -lSDL" />
+					<Add library="SDLmain" />
+					<Add library="SDL" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -36,11 +39,14 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-g" />
 			<Add option="`sdl-config --cflags`" />
-			<Add option="-Wall" />
 		</Compiler>
 		<Linker>
 			<Add option="`sdl-config --libs`" />
+			<Add directory="/lib" />
+			<Add directory="/usr/include" />
+			<Add directory="/usr/lib" />
 		</Linker>
 		<Unit filename="include/BinaryConverter.h" />
 		<Unit filename="include/Evolution.h" />
