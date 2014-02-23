@@ -51,6 +51,12 @@ Individus::~Individus()
     //dtor
 }
 
+void Individus::eat() {
+    this->eaten++;
+}
+
+
+
 void Individus::avance(double vitesse) {
 
     double xn = this->x + (cos(this->angle * M_PI / 180) * vitesse);

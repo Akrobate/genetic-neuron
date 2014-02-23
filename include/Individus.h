@@ -51,6 +51,9 @@ class Individus
         void neuronalBrainMoove();
 
         void updateFrontalSensor(vector<Item> items);
+
+        void eat();
+
     protected:
     private:
 
