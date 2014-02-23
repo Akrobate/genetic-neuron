@@ -17,6 +17,7 @@
 				<Linker>
 					<Add library="GL" />
 					<Add library="GLU" />
+					<Add library="-lmingw32 -lSDLmain -lSDL" />
 				</Linker>
 			</Target>
 			<Target title="Release">
