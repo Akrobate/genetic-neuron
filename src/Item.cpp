@@ -13,13 +13,9 @@ Item::~Item()
     //dtor
 }
 
-
 void Item::positionAleatoire(double xmax,double  ymax, double xmin, double ymin) {
     this->x = (rand()%(int)(xmax - xmin)) -xmax;
     this->y = (rand()%(int)(ymax - xmin)) -xmax;
-
-
-
 }
 
 void Item::draw()
@@ -27,7 +23,6 @@ void Item::draw()
     double height_max = 3.3;
     double height_min = 2.2;
     static bool grossi = true;
-
 
     static double height = 3;
     double altitude = 0.5;
@@ -47,15 +42,11 @@ void Item::draw()
         }
     }
 
-
-
-
     if (this->angle < 360) {
         this->angle += 3;
     } else {
         this->angle = 0;
     }
-
 
     glTranslated(this->x, this->y, 0);
 
