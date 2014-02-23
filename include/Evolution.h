@@ -12,7 +12,10 @@ class Evolution
     public:
         Evolution();
         virtual ~Evolution();
+
         vector<Individus> individus;
+        int countIndividus;
+
 
         vector<int> parents;
         vector<Individus> children;

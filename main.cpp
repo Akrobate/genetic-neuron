@@ -26,8 +26,6 @@ void Dessiner();
 void initGL();
 void testsUnit();
 
-
-
 // Declaration de globales
 double angleZ = 0;
 double angleX = 0;
@@ -38,10 +36,7 @@ Individus tousIndividus[100];
 Item myItem;
 Evolution myEvolution;
 
-
 bool play = true;
-
-
 int camMode = 0;
 
 int main(int argc, char *argv[]) {
@@ -52,76 +47,17 @@ int main(int argc, char *argv[]) {
     Uint32 current_time,ellapsed_time;
     Uint32 start_time, generationTimeStart, generationTime, generationDuration;
 
-    //myMonde.createIndividus(100);
-    //myMonde.createItems(20);
-
-
-    // myMonde.saveIndividus("fichiertest.txt");
-    // myMonde.loadIndividus("fichiertest.txt");
-
-    // evolution
-
-    /*
-    myEvolution.setIndividus(myMonde.individus);
-
-    myEvolution.createNewGeneration();
-
-    myMonde.individus.clear();
-    myMonde.individus = myEvolution.newGenerationIndividus;
-
-    myMonde.saveIndividus("apres_evolution.txt");
-
-*/
-
-/*
-    // Test fonctions de croisement
-    Evolution evoTest;
-    vector<Individus> parents;
-    vector<Individus> enfants;
-    Individus p1;
-    Individus p2;
-    parents.push_back(p1);
-    parents.push_back(p2);
-
-    // test croisement deux points
-    enfants = evoTest.croisement2Individus(parents);
-
-    cout << "P1: " << parents[0].brain.exportStringBrain(8) << endl;
-    cout << "P2: " << parents[1].brain.exportStringBrain(8) << endl;
-
-    cout << "C1: " << enfants[0].brain.exportStringBrain(8) << endl;
-    cout << "C2: " << enfants[1].brain.exportStringBrain(8) << endl;
-
-    ofstream fichier("data/testCroisement.txt", ios::out | ios::trunc);
-    if (fichier) {
-        fichier << "P1: " << parents[0].brain.exportStringBrain(8) << endl;
-        fichier << "P2: " << parents[1].brain.exportStringBrain(8) << endl;
-        fichier << "C1: " << enfants[0].brain.exportStringBrain(8) << endl;
-        fichier << "C2: " << enfants[1].brain.exportStringBrain(8) << endl;
-
-    }
-     exit(0);
-*/
-
-
-
-
-
     generationTimeStart = 0;
     generationDuration = 1000; // Une seconde
     generationDuration *= 60; // Une minute
     //generationDuration *= 5; // 5 minutes
 
-
-
     if (!myMonde.loadLastGeneration("test")) {
-        myMonde.createIndividus(20);
-        myMonde.createItems(10);
+        myMonde.createIndividus(100);
+        myMonde.createItems(20);
     }
 
     printf("GENERATion:%d", myMonde.generation);
-
-
 
     // printf("%d GET TICKS\n", SDL_GetTicks()); //DEBUG
 
@@ -159,19 +95,9 @@ int main(int argc, char *argv[]) {
                         myMonde.individus = myEvolution.newGenerationIndividus;
 
                         // individus clear scores
-                        for (int i = 0; i < myMonde.individus.size(); i++) {
-                            myMonde.individus[i].eaten = 0;
+                        myMonde.clearEat();
 
-                        }
-
-
-
-
-
-
-
-            printf("Bip\n");
-
+                        printf("------\n");
 
         }
 
@@ -231,9 +157,6 @@ int main(int argc, char *argv[]) {
         } else {
            // printf("time: %d \n", (10 - ellapsed_time));
         }
-
-
-
 
     }
 
@@ -382,6 +305,59 @@ void testsUnit() {
     vector<bool> test2 = bin.normalizeBinary(test, 10);
     bin.printBinary(test2);
     */
+
+
+
+    //myMonde.createIndividus(100);
+    //myMonde.createItems(20);
+
+
+    // myMonde.saveIndividus("fichiertest.txt");
+    // myMonde.loadIndividus("fichiertest.txt");
+
+    // evolution
+
+    /*
+    myEvolution.setIndividus(myMonde.individus);
+
+    myEvolution.createNewGeneration();
+
+    myMonde.individus.clear();
+    myMonde.individus = myEvolution.newGenerationIndividus;
+
+    myMonde.saveIndividus("apres_evolution.txt");
+
+*/
+
+/*
+    // Test fonctions de croisement
+    Evolution evoTest;
+    vector<Individus> parents;
+    vector<Individus> enfants;
+    Individus p1;
+    Individus p2;
+    parents.push_back(p1);
+    parents.push_back(p2);
+
+    // test croisement deux points
+    enfants = evoTest.croisement2Individus(parents);
+
+    cout << "P1: " << parents[0].brain.exportStringBrain(8) << endl;
+    cout << "P2: " << parents[1].brain.exportStringBrain(8) << endl;
+
+    cout << "C1: " << enfants[0].brain.exportStringBrain(8) << endl;
+    cout << "C2: " << enfants[1].brain.exportStringBrain(8) << endl;
+
+    ofstream fichier("data/testCroisement.txt", ios::out | ios::trunc);
+    if (fichier) {
+        fichier << "P1: " << parents[0].brain.exportStringBrain(8) << endl;
+        fichier << "P2: " << parents[1].brain.exportStringBrain(8) << endl;
+        fichier << "C1: " << enfants[0].brain.exportStringBrain(8) << endl;
+        fichier << "C2: " << enfants[1].brain.exportStringBrain(8) << endl;
+
+    }
+     exit(0);
+*/
 
 
 }

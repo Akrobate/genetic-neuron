@@ -13,6 +13,7 @@ Evolution::~Evolution(){
 
 void Evolution::setIndividus(vector <Individus> individus) {
     this->individus = individus;
+    this->countIndividus = individus.size();
 }
 
 vector<int> Evolution::select2Individus() {
@@ -249,7 +250,7 @@ void Evolution::createNewGeneration() {
 
 
     // creation des children
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < (this->countIndividus / 4); i++) {
 
         selectedIds = this->select2Individus();
         parents.push_back(this->individus[selectedIds[0]]);
@@ -279,7 +280,7 @@ void Evolution::createNewGeneration() {
 
 
     // creation de la nouvelle generation avec les individus concerves
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < (this->countIndividus / 2); i++) {
         for (int j=0; j < localInd.size(); j++) {
             if (j==0) {
                 _max = localInd[j].eaten;

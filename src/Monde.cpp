@@ -21,6 +21,18 @@ Monde::~Monde() {
 }
 
 
+void Monde::clearEat() {
+
+    // individus clear scores
+    for (int i = 0; i < this->individus.size(); i++) {
+        this->individus[i].eaten = 0;
+
+    }
+
+
+}
+
+
 void Monde::checkEat() {
 
     //penser a implementer le compteur de bouffe
