@@ -5,39 +5,39 @@
 		<Cursor position="456" topLine="0" />
 	</File>
 	<File name="include/Evolution.h" open="1" top="0" tabpos="4">
-		<Cursor position="539" topLine="0" />
+		<Cursor position="41" topLine="0" />
 	</File>
 	<File name="include/Individus.h" open="1" top="0" tabpos="6">
-		<Cursor position="1087" topLine="24" />
+		<Cursor position="341" topLine="0" />
 	</File>
-	<File name="include/Item.h" open="0" top="0" tabpos="7">
-		<Cursor position="132" topLine="0" />
+	<File name="include/Item.h" open="1" top="0" tabpos="12">
+		<Cursor position="429" topLine="0" />
 	</File>
 	<File name="include/Monde.h" open="1" top="0" tabpos="2">
-		<Cursor position="452" topLine="19" />
+		<Cursor position="482" topLine="19" />
 	</File>
 	<File name="include/PerceptronBrain.h" open="1" top="0" tabpos="8">
-		<Cursor position="814" topLine="10" />
+		<Cursor position="814" topLine="7" />
 	</File>
 	<File name="main.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="3196" topLine="122" />
+		<Cursor position="484" topLine="0" />
 	</File>
-	<File name="src/BinaryConverter.cpp" open="0" top="0" tabpos="9">
+	<File name="src/BinaryConverter.cpp" open="1" top="0" tabpos="10">
 		<Cursor position="615" topLine="0" />
 	</File>
 	<File name="src/Evolution.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="6228" topLine="36" />
+		<Cursor position="7337" topLine="245" />
 	</File>
 	<File name="src/Individus.cpp" open="1" top="0" tabpos="7">
-		<Cursor position="1026" topLine="33" />
+		<Cursor position="8227" topLine="300" />
 	</File>
-	<File name="src/Item.cpp" open="0" top="0" tabpos="6">
-		<Cursor position="749" topLine="0" />
+	<File name="src/Item.cpp" open="1" top="0" tabpos="11">
+		<Cursor position="160" topLine="0" />
 	</File>
 	<File name="src/Monde.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="672" topLine="6" />
+		<Cursor position="31" topLine="221" />
 	</File>
 	<File name="src/PerceptronBrain.cpp" open="1" top="0" tabpos="9">
-		<Cursor position="3372" topLine="0" />
+		<Cursor position="331" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

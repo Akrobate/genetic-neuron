@@ -17,10 +17,10 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add library="GL" />
-					<Add library="GLU" />
 					<Add library="SDLmain" />
 					<Add library="SDL" />
+					<Add library="GL" />
+					<Add library="GLU" />
 				</Linker>
 			</Target>
 			<Target title="Release">
