@@ -18,6 +18,9 @@
 
 #define M_PI  3.14159265358979323846
 
+// -lmingw32 -lSDLmain -lSDL
+// http://loka.developpez.com/tutoriel/sdl/installation/codeblocks/
+
 using namespace std;
 
 // prototype de main
